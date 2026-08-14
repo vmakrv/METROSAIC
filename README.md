@@ -90,8 +90,7 @@ Each bus can serve at most one route during a given time block, and a bus can on
 The effective capacity of a bus is adjusted based on the route loop time:
 
 ```text
-Effective Capacity =
-    Bus Capacity × (Time Period Length / Route Loop Time)
+Effective Capacity = Bus Capacity × (Time Period Length / Route Loop Time)
 ```
 
 This allows the model to account for the fact that buses completing longer loops can provide fewer service cycles during the same time period.
