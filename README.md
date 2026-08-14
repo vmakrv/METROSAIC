@@ -6,6 +6,7 @@ The application uses a mixed-integer linear programming algorithm to determine h
 
 > **Important:** METROSAIC optimizes against **observed demand**. It does not forecast future demand.
 
+
 ## Overview
 
 Transit agencies often need to balance competing objectives:
@@ -20,6 +21,7 @@ METROSAIC formulates this problem as a mixed-integer optimization model and gene
 
 The application provides an interactive [Streamlit](https://streamlit.io/) interface where users can either upload CSV datasets or enter a transit network directly.
 
+
 ## Features
 
 * 🚍 **Bus fleet optimization** — determine which buses need to be activated.
@@ -31,6 +33,7 @@ The application provides an interactive [Streamlit](https://streamlit.io/) inter
 * ✏️ **Interactive data entry** — construct a network directly in the application.
 * 📈 **Results dashboard** — view objective value, fleet utilization, route assignments, and bus schedules.
 * 💾 **Downloadable results** — export assignments, route results, and fleet utilization as CSV files.
+
 
 ## How It Works
 
