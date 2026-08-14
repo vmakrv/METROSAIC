@@ -57,7 +57,7 @@ def optimize_transit(
     demand = np.asarray(demand, dtype=float)
     loop_time = np.asarray(loop_time, dtype=float)
 
-    # Validate dimensions
+    # Validate Dimensions
     if demand.ndim != 2:
         raise ValueError("Demand must be a 2-dimensional matrix.")
 
@@ -93,6 +93,8 @@ def optimize_transit(
 
     R, T = demand.shape
 
+
+    
     # ---------------------------------------------------------
     # MODEL
     # ---------------------------------------------------------
@@ -103,6 +105,8 @@ def optimize_transit(
     model.BUSES = pyo.Set(initialize=range(B))
     model.ROUTES = pyo.Set(initialize=range(R))
     model.TIME = pyo.Set(initialize=range(T))
+
+
 
     # ---------------------------------------------------------
     # DECISION VARIABLES
@@ -145,6 +149,8 @@ def optimize_transit(
         domain=pyo.Binary
     )
 
+
+    
     # ---------------------------------------------------------
     # CONSTRAINTS
     # ---------------------------------------------------------
@@ -229,6 +235,8 @@ def optimize_transit(
                 )
             )
 
+
+    
     # ---------------------------------------------------------
     # OBJECTIVE FUNCTION
     # ---------------------------------------------------------
@@ -262,6 +270,8 @@ def optimize_transit(
         sense=pyo.minimize
     )
 
+
+    
     # ---------------------------------------------------------
     # SOLVE
     # ---------------------------------------------------------
@@ -276,6 +286,8 @@ def optimize_transit(
 
     results = solver.solve(model, tee=False)
 
+
+    
     # ---------------------------------------------------------
     # SOLVER STATUS
     # ---------------------------------------------------------
@@ -285,6 +297,8 @@ def optimize_transit(
         results.solver.termination_condition
     )
 
+
+    
     # ---------------------------------------------------------
     # EXTRACT RESULTS
     # ---------------------------------------------------------
