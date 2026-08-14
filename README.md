@@ -16,25 +16,25 @@ Transit agencies often need to balance competing objectives:
 * Providing appropriate service frequency
 * Accounting for differences in route travel/loop times
 
-METROSAIC formulates this problem as a mixed-integer optimization model and generates an operational bus schedule based on the supplied network data. It provides an interactive Streamlit interface where users can either upload CSV datasets or enter a transit network directly.
+METROSAIC formulates this problem as a mixed-integer optimization model and generates the optimal bus assignments based on the supplied network data. It provides an interactive **Streamlit** interface where users can either upload CSV datasets or enter a transit network directly.
 
 <br>
 
 ## Features
 
-* **Bus fleet optimization** — determine which buses need to be activated.
-* **Route assignment** — assign buses to routes for each time block.
-* **Demand coverage** — ensure observed demand is covered by available transit capacity.
-* **Loop-time adjustment** — account for differences in route loop times when calculating effective bus capacity.
-* **Configurable optimization objectives** — adjust the tradeoff between fleet efficiency and demand allocation.
-* **CSV input** — upload demand and loop-time matrices.
-* **Interactive data entry** — construct a network directly in the application.
-* **Results dashboard** — view objective value, fleet utilization, route assignments, and bus schedules.
-* **Downloadable results** — export assignments, route results, and fleet utilization as CSV files.
+* **Bus fleet optimization** — determine which buses need to be activated
+* **Route assignment** — assign buses to routes for each time block
+* **Demand coverage** — ensure observed demand is covered by available transit capacity
+* **Loop-time adjustment** — account for differences in route loop times when calculating effective bus capacity
+* **Configurable optimization objectives** — adjust the tradeoff between fleet efficiency and demand allocation
+* **CSV input** — upload demand and loop-time matrices
+* **Interactive data entry** — construct a network directly in the application
+* **Results dashboard** — view objective value, fleet utilization, route assignments, and bus schedules
+* **Downloadable results** — export assignments, route results, and fleet utilization as CSV files
 
 <br>
 
-## How It Works
+## Input Data
 
 METROSAIC takes two primary matrices:
 
@@ -72,7 +72,7 @@ The two matrices must have identical dimensions.
 
 ## Optimization
 
-The optimization model is implemented using [Pyomo](https://www.pyomo.org/) and solved with the **CBC mixed-integer optimization solver**.
+The optimization model is implemented using **Pyomo** and solved with the **CBC mixed-integer optimization solver**.
 
 The model determines:
 
@@ -103,8 +103,8 @@ METROSAIC minimizes a weighted objective consisting of:
 
 The relative importance of these objectives can be controlled through the application's **Demand Allocation Priority** setting.
 
-* Higher priority → favors allocating additional buses toward demand.
-* Lower priority → favors minimizing the number of activated buses.
+* Higher priority → favors allocating additional buses toward demand
+* Lower priority → favors minimizing the number of activated buses
 
 The model also uses a small positive `delta` parameter when calculating the reciprocal demand allocation penalty.
 
@@ -127,7 +127,7 @@ The application converts the demand priority into two objective weights:
 
 ```text
 Alpha = 1 - Beta
-Beta  = Demand Allocation Priority / 100
+Beta = Demand Allocation Priority / 100
 ```
 
 where `Alpha` weights fleet activation cost and `Beta` weights the demand allocation component.
@@ -178,18 +178,11 @@ Three CSV files can be downloaded directly from the application:
 
 ## Using METROSAIC
 
+METROSAIC supports two input methods:
+
 ### Option 1: Enter Data Directly
 
-1. Start the application.
-2. Select **Input Directly**.
-3. Specify the number of routes.
-4. Specify the number of time blocks.
-5. Enter the demand matrix.
-6. Enter the loop-time matrix.
-7. Configure the model parameters.
-8. Click **Generate Optimal Schedule**.
-9. Review the optimization results.
-10. Download the generated CSV files if needed.
+Select **Input Directly** to specify the number of routes and time blocks, then enter the demand and loop-time matrices directly in the application. Configure the model parameters and select **Generate Optimal Schedule** to run the optimization.
 
 ### Option 2: Upload CSV Files
 
@@ -198,20 +191,18 @@ Select **Upload CSV Files** and provide:
 * A demand CSV
 * A loop-time CSV
 
-Both datasets should have the same dimensions and be structured as:
+Both datasets must have the same dimensions and be structured as:
 
 ```text
-Rows    = Routes
+Rows = Routes
 Columns = Time Blocks
 ```
 
-Demand values should be non-negative rider counts, while loop times must be greater than zero. These conditions are validated by the application before optimization.
+Demand values must be non-negative rider counts, while loop times must be greater than zero. These conditions are validated by the application before optimization.
 
-<br>
+### Example CSV Format
 
-## Example CSV Format
-
-### `demand.csv`
+**`demand.csv`**
 
 ```csv
 Route,Time 1,Time 2,Time 3
@@ -220,7 +211,7 @@ Route,Time 1,Time 2,Time 3
 3,110,150,130
 ```
 
-### `loop_time.csv`
+**`loop_time.csv`**
 
 ```csv
 Route,Time 1,Time 2,Time 3
@@ -229,7 +220,7 @@ Route,Time 1,Time 2,Time 3
 3,90,85,90
 ```
 
-The first column is treated as part of the CSV structure when the application reads the data, so the resulting numeric matrices must have matching dimensions.
+The first column identifies the route, while the remaining columns represent time blocks. The demand and loop-time matrices must have matching dimensions.
 
 <br>
 
@@ -280,14 +271,14 @@ Python dependencies are listed in `requirements.txt`. The CBC optimization solve
 
 METROSAIC currently makes several simplifying assumptions:
 
-* Demand is treated as known observed demand rather than forecast demand.
-* Each bus can serve at most one route during a time block.
-* A bus must be activated before it can be assigned.
-* Route demand must be fully covered by calculated effective capacity.
-* Bus capacity is constant.
-* Route loop time is supplied for each route/time block.
-* Buses are interchangeable apart from their assignment.
-* The optimization does not currently model individual vehicle locations, deadheading, driver schedules, or vehicle-specific constraints.
+* Demand is treated as known observed demand rather than forecast demand
+* Each bus can serve at most one route during a time block
+* A bus must be activated before it can be assigned
+* Route demand must be fully covered by calculated effective capacity
+* Bus capacity is constant
+* Route loop time is supplied for each route/time block
+* Buses are interchangeable apart from their assignment
+* The optimization does not currently model individual vehicle locations, deadheading, driver schedules, or vehicle-specific constraints
 
 These assumptions make the model suitable for exploring fleet allocation and high-level transit scheduling decisions, while more detailed operational constraints could be added in future versions.
 
