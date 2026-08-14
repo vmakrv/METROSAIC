@@ -79,10 +79,10 @@ The model determines:
 * Whether each available bus is activated
 * Which route each bus serves during each time block
 * How many buses serve each route/time combination
-* Fleet utilization
+* Fleet utilization rate
 * Route-level service capacity and headway
 
-Each bus can serve at most one route during a given time block, and a bus can only be assigned if it has been activated.
+Each bus can serve at most one route during a given time block and a bus can only be assigned if it has been activated.
 
 ### Effective Capacity
 
