@@ -4,6 +4,7 @@ import numpy as np
 from optimizer import optimize_transit
 
 
+
 # ---------------------------------------------------------
 # PAGE CONFIGURATION
 # ---------------------------------------------------------
@@ -107,8 +108,9 @@ st.write(
 )
 
 
+
 # ---------------------------------------------------------
-# SIDEBAR — MODEL PARAMETERS
+# MODEL PARAMETERS (SIDEBAR)
 # ---------------------------------------------------------
 
 st.sidebar.header("MODEL PARAMETERS")
@@ -207,6 +209,7 @@ input_method = st.radio(
 )
 
 
+
 # ---------------------------------------------------------
 # CSV INPUT
 # ---------------------------------------------------------
@@ -274,8 +277,9 @@ if input_method == "Upload CSV Files":
         loop_time = None
 
 
+
 # ---------------------------------------------------------
-# MANUAL MATRIX INPUT
+# MANUAL INPUT
 # ---------------------------------------------------------
 
 else:
@@ -372,6 +376,7 @@ else:
     loop_time = loop_df.values.astype(float)
 
 
+
 # ---------------------------------------------------------
 # VALIDATION
 # ---------------------------------------------------------
@@ -411,6 +416,7 @@ if demand is not None and loop_time is not None:
 else:
 
     valid_data = False
+
 
 
 # ---------------------------------------------------------
@@ -478,6 +484,7 @@ else:
     )
 
 
+
 # ---------------------------------------------------------
 # RESULTS
 # ---------------------------------------------------------
@@ -490,9 +497,7 @@ if "results" in st.session_state:
     "<h2 style='margin-top: 80px; font-weight: 700;'>RESULTS</h2>",
     unsafe_allow_html=True)
 
-    # -----------------------------------------------------
     # SUMMARY METRICS
-    # -----------------------------------------------------
 
     col1, col2, col3, col4 = st.columns(4)
 
@@ -538,9 +543,7 @@ if "results" in st.session_state:
         results["termination_condition"]
     )
 
-    # -----------------------------------------------------
     # BUS UTILIZATION
-    # -----------------------------------------------------
 
     st.subheader("Fleet Utilization")
 
@@ -550,9 +553,7 @@ if "results" in st.session_state:
         hide_index=True
     )
 
-    # -----------------------------------------------------
     # ROUTE ASSIGNMENTS
-    # -----------------------------------------------------
 
     st.subheader("Route Assignments")
 
@@ -562,9 +563,7 @@ if "results" in st.session_state:
         hide_index=True
     )
 
-    # -----------------------------------------------------
     # BUS SCHEDULE
-    # -----------------------------------------------------
 
     st.subheader("Bus Schedule")
 
@@ -600,9 +599,7 @@ if "results" in st.session_state:
             "No bus assignments were generated."
         )
 
-    # -----------------------------------------------------
     # DOWNLOADS
-    # -----------------------------------------------------
 
     st.subheader("Download Results")
 
