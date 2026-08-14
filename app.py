@@ -101,8 +101,8 @@ st.markdown(
 
 st.write(
     """
-    Optimize bus assignments across a hub-and-spoke transit network using observed demand and route loop times.
-    In this algorithm, demand represents the number of riders on each route during each time block and loop time represents the time required for a bus to complete a route (depart from and return to the origin). \n
+    Optimize bus assignments across a hub-and-spoke transit network using observed demand and route-specific loop times.
+    In this model, demand represents the number of riders on each route during each time block and loop time represents the time required for a bus to complete a route (depart from and return to the origin). \n
     *NOTE: The optimization algroithm treats your demand matrix as observed demand that must be fully covered. It does not forecast demand.*
     """
 )
