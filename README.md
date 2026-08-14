@@ -1,8 +1,6 @@
 # METROSAIC: Transit Schedule Optimizer
 
-**METROSAIC** is an interactive transit scheduling optimization tool designed to help allocate buses across a hub-and-spoke transit network based on observed passenger demand and route loop times.
-
-The application uses a mixed-integer linear programming algorithm to determine how many buses should be activated and how those buses should be assigned to routes across different time blocks.
+**METROSAIC** is an interactive transit scheduling optimization tool designed to help allocate buses across a hub-and-spoke transit network based on observed passenger demand and route loop times. The application uses a mixed-integer linear programming algorithm to determine how many buses should be activated and how those buses should be assigned to routes across different time blocks.
 
 > **Important:** METROSAIC optimizes against **observed demand**. It does not forecast future demand.
 
@@ -24,15 +22,15 @@ The application provides an interactive [Streamlit](https://streamlit.io/) inter
 
 ## Features
 
-* 🚍 **Bus fleet optimization** — determine which buses need to be activated.
-* 🗺️ **Route assignment** — assign buses to routes for each time block.
-* 📊 **Demand coverage** — ensure observed demand is covered by available transit capacity.
-* ⏱️ **Loop-time adjustment** — account for differences in route loop times when calculating effective bus capacity.
-* ⚖️ **Configurable optimization objectives** — adjust the tradeoff between fleet efficiency and demand allocation.
-* 📁 **CSV input** — upload demand and loop-time matrices.
-* ✏️ **Interactive data entry** — construct a network directly in the application.
-* 📈 **Results dashboard** — view objective value, fleet utilization, route assignments, and bus schedules.
-* 💾 **Downloadable results** — export assignments, route results, and fleet utilization as CSV files.
+* **Bus fleet optimization** — determine which buses need to be activated.
+* **Route assignment** — assign buses to routes for each time block.
+* **Demand coverage** — ensure observed demand is covered by available transit capacity.
+* **Loop-time adjustment** — account for differences in route loop times when calculating effective bus capacity.
+* **Configurable optimization objectives** — adjust the tradeoff between fleet efficiency and demand allocation.
+* **CSV input** — upload demand and loop-time matrices.
+* **Interactive data entry** — construct a network directly in the application.
+* **Results dashboard** — view objective value, fleet utilization, route assignments, and bus schedules.
+* **Downloadable results** — export assignments, route results, and fleet utilization as CSV files.
 
 
 ## How It Works
@@ -414,7 +412,3 @@ METROSAIC is built with:
 * [CBC](https://github.com/coin-or/Cbc) — open-source mixed-integer programming solver
 * [NumPy](https://numpy.org/) — numerical computing
 * [pandas](https://pandas.pydata.org/) — data manipulation and analysis
-
----
-**METROSAIC**
-*Transit Schedule Optimizer*
