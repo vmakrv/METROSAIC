@@ -71,7 +71,7 @@ Example:
 
 The two matrices must have identical dimensions.
 
-## Optimization Model
+## Optimization
 
 The optimization model is implemented using [Pyomo](https://www.pyomo.org/) and solved with the **CBC mixed-integer optimization solver**.
 
@@ -110,7 +110,7 @@ The relative importance of these objectives can be controlled through the applic
 
 The model also uses a small positive `delta` parameter when calculating the reciprocal demand allocation penalty.
 
-## Application Parameters
+## Parameters
 
 The Streamlit interface exposes the following parameters:
 
