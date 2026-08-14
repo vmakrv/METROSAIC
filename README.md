@@ -12,7 +12,7 @@ Transit agencies often need to balance competing objectives:
 
 * Meeting passenger demand across routes
 * Using a limited number of buses efficiently
-* Avoiding unnecessary bus activations
+* Avoiding unnecessary bus deployments
 * Providing appropriate service frequency
 * Accounting for differences in route travel/loop times
 
