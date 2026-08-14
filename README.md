@@ -2,7 +2,7 @@
 
 **METROSAIC** is an interactive transit scheduling optimization tool designed to help allocate buses across a hub-and-spoke transit network based on observed passenger demand and route loop times.
 
-The application uses a mathematical optimization model to determine how many buses should be activated and how those buses should be assigned to routes across different time blocks.
+The application uses a mixed-integer linear programming algorithm to determine how many buses should be activated and how those buses should be assigned to routes across different time blocks.
 
 > **Important:** METROSAIC optimizes against **observed demand**. It does not forecast future demand.
 
