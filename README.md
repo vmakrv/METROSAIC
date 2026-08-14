@@ -1,23 +1,15 @@
 # METROSAIC: Transit Schedule Optimizer
 
-**METROSAIC** is an interactive transit scheduling optimization tool designed to help allocate buses across a hub-and-spoke transit network based on observed passenger demand and route loop times. The application uses a mixed-integer linear programming algorithm to determine how many buses should be activated and how those buses should be assigned to routes across different time blocks. Try it here: https://metrosaic.streamlit.app/
+**METROSAIC** is an interactive transit scheduling optimization tool designed to help allocate buses across a hub-and-spoke transit network based on observed passenger demand and route loop times. The application uses a **mixed-integer linear programming (MILP)** model to determine how many buses should be activated and how those buses should be assigned to routes across different time blocks. **[Try METROSAIC here](https://metrosaic.streamlit.app/).**
 
 > **Important:** METROSAIC optimizes against **observed demand**. It does not forecast future demand.
 
 
 ## Overview
 
-Transit agencies often need to balance competing objectives:
+Transit agencies must balance passenger demand with limited fleet resources. METROSAIC addresses this problem by optimizing bus assignments across routes and time blocks while accounting for route-specific loop times and bus capacity.
 
-* Meeting passenger demand across routes
-* Using a limited number of buses efficiently
-* Avoiding unnecessary bus deployments
-* Providing appropriate service frequency
-* Accounting for differences in route travel/loop times
-
-METROSAIC formulates this problem as a mixed-integer optimization model and generates an operational bus schedule based on the supplied network data.
-
-The application provides an interactive [Streamlit](https://streamlit.io/) interface where users can either upload CSV datasets or enter a transit network directly.
+Users can either enter a transit network directly or upload demand and loop-time matrices through the interactive [Streamlit](https://streamlit.io/) interface.
 
 
 ## Features
