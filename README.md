@@ -4,13 +4,21 @@
 
 > **Important:** METROSAIC optimizes against **observed demand**. It does not forecast future demand.
 
+<br>
 
 ## Overview
 
-Transit agencies must balance passenger demand with limited fleet resources. METROSAIC addresses this problem by optimizing bus assignments across routes and time blocks while accounting for route-specific loop times and bus capacity.
+Transit agencies often need to balance competing objectives:
 
-Users can either enter a transit network directly or upload demand and loop-time matrices through the interactive [Streamlit](https://streamlit.io/) interface.
+* Meeting passenger demand across routes
+* Using a limited number of buses efficiently
+* Avoiding unnecessary bus activations
+* Providing appropriate service frequency
+* Accounting for differences in route travel/loop times
 
+METROSAIC formulates this problem as a mixed-integer optimization model and generates an operational bus schedule based on the supplied network data. It provides an interactive Streamlit interface where users can either upload CSV datasets or enter a transit network directly.
+
+<br>
 
 ## Features
 
@@ -24,6 +32,7 @@ Users can either enter a transit network directly or upload demand and loop-time
 * **Results dashboard** — view objective value, fleet utilization, route assignments, and bus schedules.
 * **Downloadable results** — export assignments, route results, and fleet utilization as CSV files.
 
+<br>
 
 ## How It Works
 
@@ -33,8 +42,6 @@ METROSAIC takes two primary matrices:
 
 The demand matrix represents the number of riders expected/observed for each route during each time block.
 
-**Rows:** Routes
-**Columns:** Time blocks
 **Values:** Number of riders
 
 Example:
@@ -49,8 +56,6 @@ Example:
 
 The loop-time matrix represents the amount of time, in minutes, required for a bus to complete a route loop during each time block.
 
-**Rows:** Routes
-**Columns:** Time blocks
 **Values:** Minutes
 
 Example:
@@ -62,6 +67,8 @@ Example:
 | Route 3 |           90 |           85 |           90 |
 
 The two matrices must have identical dimensions.
+
+<br>
 
 ## Optimization
 
@@ -101,6 +108,8 @@ The relative importance of these objectives can be controlled through the applic
 
 The model also uses a small positive `delta` parameter when calculating the reciprocal demand allocation penalty.
 
+<br>
+
 ## Parameters
 
 The Streamlit interface exposes the following parameters:
@@ -122,6 +131,8 @@ Beta  = Demand Allocation Priority / 100
 ```
 
 where `Alpha` weights fleet activation cost and `Beta` weights the demand allocation component.
+
+<br>
 
 ## Results
 
@@ -163,76 +174,7 @@ Three CSV files can be downloaded directly from the application:
 * `route_results.csv`
 * `fleet_utilization.csv`
 
-## Installation
-
-### Prerequisites
-
-You will need:
-
-* Python 3.x
-* CBC optimization solver
-* `pip`
-
-The Python dependencies are:
-
-```text
-streamlit
-pandas
-numpy
-pyomo
-```
-
-CBC is listed separately as a system package because Pyomo requires an external solver to execute the optimization model.
-
-### Clone the Repository
-
-```bash
-git clone https://github.com/vmakrv/METROSAIC.git
-cd METROSAIC
-```
-
-### Install Python Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### Install CBC
-
-The repository includes `coinor-cbc` in `packages.txt`.
-
-On Ubuntu/Debian:
-
-```bash
-sudo apt-get update
-sudo apt-get install coinor-cbc
-```
-
-On macOS with Homebrew:
-
-```bash
-brew install coin-or-tools/coinor/cbc
-```
-
-Verify that CBC is available:
-
-```bash
-cbc -stop
-```
-
-## Running the Application
-
-Start the Streamlit application with:
-
-```bash
-streamlit run app.py
-```
-
-Streamlit will provide a local URL, typically:
-
-```text
-http://localhost:8501
-```
+<br>
 
 ## Using METROSAIC
 
@@ -265,6 +207,8 @@ Columns = Time Blocks
 
 Demand values should be non-negative rider counts, while loop times must be greater than zero. These conditions are validated by the application before optimization.
 
+<br>
+
 ## Example CSV Format
 
 ### `demand.csv`
@@ -287,9 +231,11 @@ Route,Time 1,Time 2,Time 3
 
 The first column is treated as part of the CSV structure when the application reads the data, so the resulting numeric matrices must have matching dimensions.
 
+<br>
+
 ## Project Structure
 
-```text
+```text id="7l5b2w"
 METROSAIC/
 ├── .streamlit/
 ├── app.py
@@ -304,13 +250,12 @@ METROSAIC/
 Contains the Streamlit user interface, including:
 
 * Model parameter controls
-* Data input
-* Data validation
+* Data input and validation
 * Optimization execution
 * Results visualization
 * CSV downloads
 
-The application calls `optimize_transit()` from `optimizer.py` to perform the underlying optimization.
+The application calls `optimize_transit()` from `optimizer.py` to perform the optimization.
 
 ### `optimizer.py`
 
@@ -323,26 +268,13 @@ Contains the Pyomo optimization model, including:
 * Result extraction
 * Route and fleet summaries
 
-The model uses binary variables for bus activation and route assignments and integer variables for the number of buses assigned to each route/time combination.
+The model uses binary variables for bus activation and route assignments, along with integer variables for the number of buses assigned to each route/time combination.
 
-### `requirements.txt`
+### Dependencies
 
-Contains the Python dependencies:
+Python dependencies are listed in `requirements.txt`. The CBC optimization solver is specified in `packages.txt` and is required by Pyomo to solve the model.
 
-```text
-streamlit
-pandas
-numpy
-pyomo
-```
-
-### `packages.txt`
-
-Specifies the CBC solver dependency:
-
-```text
-coinor-cbc
-```
+<br>
 
 ## Model Assumptions
 
@@ -359,42 +291,9 @@ METROSAIC currently makes several simplifying assumptions:
 
 These assumptions make the model suitable for exploring fleet allocation and high-level transit scheduling decisions, while more detailed operational constraints could be added in future versions.
 
-## Future Improvements
+<br>
 
-Potential extensions include:
-
-* Demand forecasting
-* Multi-depot networks
-* Vehicle-specific characteristics
-* Driver scheduling and labor constraints
-* Deadhead and repositioning costs
-* Minimum/maximum service frequencies
-* Time-dependent travel times
-* Multiple vehicle types
-* Reliability and disruption scenarios
-* Visualization of route-level service
-* Sensitivity analysis
-* Automated scenario comparison
-
-## Contributing
-
-Contributions, suggestions, and improvements are welcome.
-
-To contribute:
-
-1. Fork the repository.
-2. Create a feature branch.
-3. Make your changes.
-4. Test the application and optimization model.
-5. Submit a pull request.
-
-For larger changes, opening an issue first is recommended so the proposed approach can be discussed.
-
-## License
-
-No license file is currently included in the repository. If you intend for METROSAIC to be used or modified by others, consider adding an appropriate open-source license.
-
-## Acknowledgments
+## Technology Stack
 
 METROSAIC is built with:
 
